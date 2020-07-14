@@ -38,16 +38,9 @@ RUN ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime \
 
 RUN mkdir -p /opt/games/theforest/game /opt/games/theforest/logs
 
-RUN /usr/games/steamcmd \
-    +@sSteamCmdForcePlatformType windows \
-    +login anonymous \
-    +force_install_dir /opt/games/theforest/game \
-    +app_update 556450 validate \
-    +quit
-
 COPY . ./
 
-RUN chmod +x /opt/games/theforest/runserver.sh
+RUN chmod +x /opt/games/theforest/server.sh /opt/games/theforest/manager.sh
 
 EXPOSE 8766/tcp 8766/udp 27015/tcp 27015/udp 27016/tcp 27016/udp
 
