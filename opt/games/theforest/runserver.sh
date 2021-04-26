@@ -3,7 +3,7 @@ d=/theforest
 mkdir -p ${d}/saves ${d}/config ${d}/logs
 
 if [ ! -f ${d}/config/config.cfg ]; then
-  cp /opt/games/theforest/config/config.cfg.example ${d}/config/config.cfg.example
+  cp /opt/games/theforest/config/config.cfg.example ${d}/config/config.cfg
 fi
 
 cd /opt/games/theforest/game

@@ -4,24 +4,7 @@ LABEL maintainer="Philip Kauffman"
 
 ENV DEBIAN_FRONTEND=noninteractive 
 
-RUN apt-get update \
-    && apt-get install -y software-properties-common
-
-RUN add-apt-repository universe \
-    && add-apt-repository multiverse
-
 RUN dpkg --add-architecture i386
-
-RUN apt-get install -y locales \
-    && /usr/sbin/locale-gen en_US.UTF-8 \
-    && /usr/sbin/update-locale LANG=en_US.UTF-8
-
-RUN apt-get update \
-    && apt-get install -y \
-    supervisor \
-    xvfb \
-    winbind \
-    wine-stable
 
 RUN { \
       echo steamcmd steam/purge note; \
@@ -29,12 +12,15 @@ RUN { \
       echo steamcmd steam/question select 'I AGREE'; \
     } | debconf-set-selections
 
-RUN apt-get install -y steamcmd:i386
+RUN apt-get update \
+    && apt-get install -y \
+    supervisor \
+    xvfb \
+    winbind \
+    wine-stable \
+    steamcmd:i386
 
-RUN apt-get autoremove -y
-
-RUN ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime \
-    && echo $TIMEZONE > /etc/timezone
+RUN apt-get clean -y
 
 RUN mkdir -p /opt/games/theforest/game /opt/games/theforest/logs
 
