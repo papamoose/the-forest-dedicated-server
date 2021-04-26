@@ -1,0 +1,19 @@
+---
+version: "3"
+
+services:
+
+  theforest:
+    #image: papamoose/the-forest-dedicated-server:latest
+    build: .
+    container_name: theforest
+    restart: unless-stopped
+    volumes:
+      - ./data:/theforest
+    ports:
+      - 8766:8766/tcp
+      - 8766:8766/udp
+      - 27015:27015/tcp
+      - 27015:27015/udp
+      - 27016:27016/tcp
+      - 27016:27016/udp
